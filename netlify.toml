@@ -1,0 +1,45 @@
+[build]
+  # Static site — no build step needed. Drag & drop ready.
+  # If you add a build (Vite/Tailwind CLI), uncomment:
+  # command = "npm run build"
+  # publish = "dist"
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Redirects for SPA-like 404 and WhatsApp shortlink
+[[redirects]]
+  from = "/reserva"
+  to = "https://wa.me/593999123456?text=Hola%20Sabor%20Quite%C3%B1o%2C%20quiero%20reservar%20una%20mesa"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers — performance + security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

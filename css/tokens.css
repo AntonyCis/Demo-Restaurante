@@ -1,0 +1,62 @@
+/* ============================================================================
+   Sabor Quiteño — Design tokens
+   Single source of truth for the palette, spacing rhythm and motion easing.
+   Values marked "AA" are verified against WCAG 2.1 (4.5:1 body, 3:1 large
+   text and UI boundaries). js/tailwind.config.js mirrors the raw palette so
+   Tailwind utility classes resolve to the same colours — change both together.
+   ========================================================================== */
+
+:root {
+  /* --- raw palette ------------------------------------------------------ */
+  --sq-cream: #fdf9f3;
+  --sq-sand: #e8ddd0;
+  --sq-clay: #c4a484;
+  --sq-terracotta: #8f5f44; /* darkened from #9c6b4f — was 4.32:1 on cream, now 5.15:1 AA */
+  --sq-cacao: #2b1e12;
+  --sq-olive: #3a3d2c;
+  --sq-stone: #6b6560; /* 5.48:1 on cream AA */
+  --sq-line: #e8ddd0;
+  --sq-white: #fff;
+
+  /* --- semantic: text on light surfaces (cream / sand / white) ---------- */
+  --sq-ink: var(--sq-cacao); /* 15.43:1 */
+  --sq-ink-muted: rgba(43, 30, 18, 0.7); /* 5.85:1 AA */
+  --sq-ink-subtle: rgba(43, 30, 18, 0.65); /* 4.97:1 AA */
+  --sq-accent: var(--sq-terracotta); /* 5.15:1 AA */
+
+  /* --- semantic: text on dark surfaces (cacao / olive) ------------------ */
+  --sq-on-dark: var(--sq-cream); /* 15.43:1 on cacao */
+  --sq-on-dark-muted: rgba(253, 249, 243, 0.75); /* 6.79:1 on olive AA */
+  --sq-on-dark-subtle: rgba(253, 249, 243, 0.6); /* 4.99:1 on olive AA */
+  --sq-on-dark-accent: var(--sq-clay); /* 6.93:1 cacao / 4.77:1 olive AA */
+
+  /* --- scrims: make text legible over unpredictable photography --------- */
+  /* >=0.62 alpha where header text sits, so white clears 4.5:1 on the
+     brightest plausible hero pixel. */
+  --sq-scrim-header: linear-gradient(
+    180deg,
+    rgba(43, 30, 18, 0.82) 0%,
+    rgba(43, 30, 18, 0.68) 52%,
+    rgba(43, 30, 18, 0.46) 100%
+  );
+  --sq-scrim-badge: rgba(43, 30, 18, 0.65); /* 4.97:1 cream text, worst-case photo */
+
+  /* --- structure -------------------------------------------------------- */
+  --sq-header-h: 68px;
+  --sq-radius-pill: 9999px;
+  --sq-transition-theme: 0.5s ease;
+  --sq-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --sq-ease-mask: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --sq-header-h: 76px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --sq-header-h: 84px;
+  }
+}

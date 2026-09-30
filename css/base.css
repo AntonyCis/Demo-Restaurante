@@ -1,0 +1,166 @@
+/* ============================================================================
+   Sabor Quiteño — Base layer
+   Reset, accessibility primitives and shared utilities. Component-specific
+   rules live in ./components/*.
+   ========================================================================== */
+
+/* --- smooth scroll ------------------------------------------------------- */
+* {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* --- focus & selection --------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--sq-terracotta);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--sq-clay);
+  color: var(--sq-cacao);
+}
+
+/* --- skip link ----------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1rem;
+  background: var(--sq-cacao);
+  color: var(--sq-cream);
+  z-index: 9999;
+  border-radius: var(--sq-radius-pill);
+}
+
+/* --- editorial helpers --------------------------------------------------- */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--sq-line), transparent);
+}
+
+.editorial-num {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- scroll-driven reveals ---------------------------------------------- */
+.img-reveal {
+  clip-path: inset(0 12% 0 0);
+}
+
+.img-reveal.in {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.3s var(--sq-ease-mask);
+}
+
+/* --- form fields --------------------------------------------------------- */
+/* Tailwind's focus:outline-none outranks :focus-visible and silently removed
+   the keyboard ring, so focus styling lives here instead. Border uses cacao at
+   50% for a 3.2:1 boundary against the white fill. */
+.form-field {
+  flex: 1;
+  min-height: 44px;
+  background: var(--sq-white);
+  border: 1px solid rgba(43, 30, 18, 0.5);
+  border-radius: var(--sq-radius-pill);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  color: var(--sq-ink);
+}
+
+.form-field::placeholder {
+  color: var(--sq-stone); /* 5.74:1 on white */
+}
+
+.form-field:focus-visible {
+  border-color: var(--sq-cacao);
+  box-shadow: 0 0 0 1px var(--sq-cacao);
+}
+
+/* --- custom cursor ------------------------------------------------------- */
+#cursor,
+#cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  display: none;
+}
+
+#cursor {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--sq-cacao);
+  border-radius: 50%;
+}
+
+#cursor-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--sq-cacao);
+  border-radius: 50%;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #cursor,
+  #cursor-dot {
+    display: block;
+  }
+}
+
+#cursor.hover {
+  transform: scale(1.7);
+  background: rgba(43, 30, 18, 0.06);
+}
+
+/* --- scroll progress ----------------------------------------------------- */
+#progress {
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+/* --- reduced motion ------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .img-reveal {
+    clip-path: none !important;
+  }
+
+  #cursor,
+  #cursor-dot {
+    display: none !important;
+  }
+}

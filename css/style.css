@@ -1,0 +1,13 @@
+/* ============================================================================
+   Sabor Quiteño — stylesheet entry point.
+
+   Layer order matters: tokens define the variables every later layer reads,
+   base sets global rules, components stay scoped to their own block.
+
+   index.html links this single file; Vite inlines the imports on build.
+   ========================================================================== */
+
+@import "./tokens.css";
+@import "./base.css";
+@import "./components/header.css";
+@import "./components/preloader.css";

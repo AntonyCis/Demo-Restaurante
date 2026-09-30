@@ -1,0 +1,100 @@
+/* ============================================================================
+   Sabor Quiteño — Header
+   The header rides over unpredictable content (a photo on the left, a cream
+   panel on the right), so contrast can never be left to chance. Two themes,
+   driven by a single `.is-scrolled` class so every descendant switches at once:
+
+     transparent -> white text on a cacao scrim (min 5.8:1, worst case)
+     scrolled    -> cacao text on an opaque cream bar (15.4:1)
+
+   Adding a new child element means styling it here, not in the scroll handler.
+   ========================================================================== */
+
+#header {
+  --hdr-fg: #fff; /* primary text */
+  --hdr-fg-inv: var(--sq-cacao); /* text on a --hdr-fg fill */
+  --hdr-fg-dim: rgba(255, 255, 255, 0.94); /* secondary text, 5.4:1 */
+  --hdr-line: rgba(255, 255, 255, 0.72); /* meaningful boundary, 3.9:1 */
+  --hdr-rule: rgba(255, 255, 255, 0.5); /* decorative separator */
+}
+
+#header.is-scrolled {
+  --hdr-fg: var(--sq-cacao);
+  --hdr-fg-inv: var(--sq-cream);
+  --hdr-fg-dim: rgba(43, 30, 18, 0.8); /* 8.2:1 */
+  --hdr-line: rgba(43, 30, 18, 0.55); /* 3.65:1 */
+  --hdr-rule: rgba(43, 30, 18, 0.3);
+}
+
+#header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--sq-scrim-header);
+  opacity: 1;
+  transition: opacity var(--sq-transition-theme);
+}
+
+#header.is-scrolled::before {
+  opacity: 0;
+}
+
+/* Lifts content above the scrim. */
+#header .hdr-inner {
+  position: relative;
+}
+
+#header .hdr-logo,
+#header .nav-link {
+  color: var(--hdr-fg);
+}
+
+#header .hdr-tag {
+  color: var(--hdr-fg-dim);
+  border-left-color: var(--hdr-rule);
+}
+
+#header .nav-link {
+  position: relative;
+}
+
+#header .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transition: transform 0.35s var(--sq-ease-out);
+}
+
+#header .nav-link:hover::after,
+#header .nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+#header-cta {
+  color: var(--hdr-fg);
+  border-color: var(--hdr-line);
+  transition: background-color 0.25s var(--sq-ease-out), color 0.25s var(--sq-ease-out),
+    border-color 0.25s var(--sq-ease-out);
+}
+
+#header-cta:hover {
+  background: var(--hdr-fg);
+  color: var(--hdr-fg-inv);
+  border-color: var(--hdr-fg);
+}
+
+#menuBtn span {
+  background: var(--hdr-fg);
+}
+
+/* Panel offset is derived from the same token as the bar height, so the two
+   can never drift apart. */
+#mobileNav {
+  top: var(--sq-header-h);
+}

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sabor Quiteño — Alta cocina de territorio</title>
+<meta name="description" content="Sabor Quiteño. Cocina contemporánea ecuatoriana — territorio, memoria y fuego lento en Quito.">
+<meta name="theme-color" content="#2B1E12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232B1E12'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F3' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@400;500;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Palette mirrors css/tokens.css (the design source of truth). Inlined on
+     purpose: a classic script cannot be bundled by Vite, and an external file
+     would 404 in dist/, silently dropping every colour. -->
+<script>tailwind.config={theme:{extend:{colors:{cream:'#FDF9F3',sand:'#E8DDD0',clay:'#C4A484',terracotta:'#8F5F44',cacao:'#2B1E12',olive:'#3A3D2C',stone:'#6B6560',line:'#E8DDD0'},fontFamily:{serif:['"Cormorant Garamond"','"Instrument Serif"','serif'],sans:['"DM Sans"','system-ui','sans-serif']}}}};</script>
+<link rel="stylesheet" href="css/style.css">
+<script>
+/* Classic script on purpose: ES modules are blocked by CORS on file://, so a
+   double-clicked index.html would boot with zero JavaScript and every
+   interaction — hamburger menu included — would silently do nothing. */
+if (location.protocol === "file:") {
+  document.addEventListener("DOMContentLoaded", function () {
+    var banner = document.createElement("div");
+    banner.setAttribute("role", "alert");
+    banner.style.cssText = "position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:2rem;background:#2B1E12;color:#FDF9F3;font:16px/1.6 system-ui,sans-serif;text-align:center";
+    banner.innerHTML = "<div><p style='font:600 13px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#C4A484;margin:0 0 1rem'>Sabor Quiteño</p><h1 style='font:500 28px/1.2 Georgia,serif;margin:0 0 1rem'>Hay que servir el proyecto</h1><p style='margin:0 auto;max-width:34ch;opacity:.85'>Los módulos ES no cargan desde <code style='background:rgba(255,255,255,.1);padding:.15em .4em;border-radius:4px'>file://</code>. Abrirlo directo deja el sitio sin JavaScript y el menú no responde.</p><p style='margin:1.5rem 0 0;opacity:.85'>Ejecuta <code style='background:rgba(255,255,255,.1);padding:.15em .4em;border-radius:4px'>npm run dev</code> y entra por <code style='background:rgba(255,255,255,.1);padding:.15em .4em;border-radius:4px'>http://localhost:5173</code></p></div>";
+    document.body.appendChild(banner);
+  });
+}
+</script>
+</head>
+<body class="bg-cream text-cacao font-sans antialiased overflow-x-hidden selection:bg-clay/30 pb-[76px] lg:pb-0">
+<a href="#main" class="skip-link">Saltar al contenido</a>
+<div id="preloader" class="fixed inset-0 z-[100] bg-cream flex flex-col justify-between p-6 sm:p-10">
+  <div class="flex justify-between items-start"><span class="editorial-num text-stone">QUITO — 0°13′S</span><span class="editorial-num text-stone">2012 — 2026</span></div>
+  <div class="text-center">
+    <p class="font-serif text-[14px] tracking-[0.32em] uppercase text-stone">Sabor Quiteño</p>
+    <div class="mt-6 flex justify-center"><div class="w-[1px] h-16 bg-line origin-top" id="preloader-line"></div></div>
+    <p id="preloader-pct" class="font-serif text-[11px] tracking-[0.2em] text-stone mt-4">00</p>
+  </div>
+  <div class="h-[1px] bg-line overflow-hidden"><div id="preloader-bar" class="h-full bg-cacao w-0"></div></div>
+</div>
+
+<div id="cursor" aria-hidden="true"></div><div id="cursor-dot" aria-hidden="true"></div>
+<div id="progress" class="fixed top-0 left-0 right-0 h-[2px] bg-cacao z-[60] origin-left scale-x-0" aria-hidden="true"></div>
+
+<header id="header" class="fixed top-0 inset-x-0 z-40 border-b border-white/15 bg-transparent transition-all duration-500">
+  <div class="hdr-inner max-w-[1680px] mx-auto px-4 sm:px-6 lg:px-10 h-[68px] sm:h-[76px] lg:h-[84px] flex items-center justify-between gap-6">
+    <a href="#" class="flex items-center gap-6 sm:gap-10 shrink-0 cursor-pointer focus-visible:outline-offset-4">
+      <span class="hdr-logo font-serif text-[22px] sm:text-[24px] lg:text-[26px] font-medium tracking-[-0.03em] leading-none">Sabor Quiteño<span class="font-light"> —</span></span>
+      <span class="hidden sm:inline editorial-num hdr-tag border-l pl-8 text-[11px]">COCINA DE TERRITORIO</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8 xl:gap-10" aria-label="Principal">
+      <a href="#territorio" class="nav-link text-[13px] font-medium tracking-[0.08em] uppercase cursor-pointer py-2">Territorio</a>
+      <a href="#menu" class="nav-link text-[13px] font-medium tracking-[0.08em] uppercase cursor-pointer py-2">Carta</a>
+      <a href="#espacio" class="nav-link text-[13px] font-medium tracking-[0.08em] uppercase cursor-pointer py-2">Espacio</a>
+      <a id="header-cta" href="#visitanos" class="cursor-pointer text-[13px] font-medium tracking-[0.06em] uppercase border px-7 py-3 rounded-full transition">Reservar</a>
+    </nav>
+    <button id="menuBtn" class="lg:hidden w-12 h-12 grid place-items-center cursor-pointer shrink-0" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNav"><span class="w-7 h-[1.5px] block transition-all"></span><span class="w-7 h-[1.5px] block mt-2 transition-all"></span></button>
+  </div>
+</header>
+
+<!-- Outside <header> on purpose: a backdrop-filter on the bar would make it the
+     containing block for fixed descendants, collapsing this panel to 1px. As a
+     sibling it resolves against the viewport. -->
+<div id="mobileNav" class="lg:hidden hidden fixed inset-x-0 bottom-0 z-50 bg-cream text-cacao border-t border-line overflow-y-auto" aria-hidden="true">
+    <nav class="px-6 py-10 flex flex-col gap-6 editorial-num text-[13px]" aria-label="Móvil">
+      <a href="#territorio" class="py-3 border-b border-line cursor-pointer flex items-center justify-between min-h-[44px]">Territorio <span aria-hidden="true">→</span></a>
+      <a href="#menu" class="py-3 border-b border-line cursor-pointer flex items-center justify-between min-h-[44px]">Carta <span aria-hidden="true">→</span></a>
+      <a href="#espacio" class="py-3 border-b border-line cursor-pointer flex items-center justify-between min-h-[44px]">Espacio <span aria-hidden="true">→</span></a>
+      <a href="#visitanos" class="py-3 cursor-pointer flex items-center justify-between min-h-[44px]">Visítanos <span aria-hidden="true">→</span></a>
+      <a href="https://wa.me/593999123456?text=Hola%20Sabor%20Quite%C3%B1o%2C%20quiero%20reservar" target="_blank" rel="noopener" class="mt-6 bg-cacao text-cream text-center py-4 rounded-full cursor-pointer min-h-[48px] flex items-center justify-center">Reservar por WhatsApp</a>
+      <p class="text-center text-xs text-stone normal-case tracking-normal">Av. Amazonas y Colón · Quito</p>
+    </nav>
+  </div>
+
+<main id="main">
+<section class="relative min-h-[100svh] flex flex-col lg:flex-row">
+  <div class="relative lg:w-[58%] h-[58svh] lg:h-[100svh] overflow-hidden bg-sand">
+    <div id="hero-img-wrap" class="absolute inset-0 will-change-transform">
+      <img id="hero-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1920&q=80" alt="Hornado quiteño servido en mesa de madera" class="w-full h-[120%] -mt-[6%] object-cover object-center">
+    </div>
+    <div class="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 editorial-num text-cream bg-cacao/65 backdrop-blur px-3 py-1.5 rounded-full border border-white/20">Quito · 2.850 MSNM · Fuego de leña</div>
+  </div>
+  <div class="lg:w-[42%] bg-cream flex flex-col justify-center px-6 sm:px-10 lg:px-14 py-10 sm:py-14 lg:py-0 relative">
+    <p class="editorial-num text-terracotta text-[12px] tracking-[0.2em]">01 — IDENTIDAD</p>
+    <h1 id="hero-title" class="font-serif font-light leading-[0.84] tracking-[-0.045em] text-[48px] sm:text-[64px] lg:text-[84px] xl:text-[96px] mt-6">
+      <span class="block overflow-hidden"><span class="block line">Sabor</span></span>
+      <span class="block overflow-hidden italic font-light"><span class="block line">Quiteño</span></span>
+      <span class="block overflow-hidden text-[20px] sm:text-[22px] lg:text-[24px] tracking-[0.01em] font-normal mt-5 leading-none"><span class="block line">Cocina de territorio,</span></span>
+      <span class="block overflow-hidden text-[20px] sm:text-[22px] lg:text-[24px] tracking-[0.01em] font-normal leading-none"><span class="block line">memoria y fuego lento.</span></span>
+    </h1>
+    <p id="hero-sub" class="mt-8 max-w-[380px] text-[15px] sm:text-[16px] leading-7 text-cacao/80">Maíz de la sierra, cacao de la costa y cerdo de páramo. Una cocina que no folcloriza: observa, respeta y transforma.</p>
+    <div id="hero-cta" class="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-6">
+      <a href="https://wa.me/593999123456?text=Hola%20Sabor%20Quite%C3%B1o%2C%20quiero%20reservar" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 border border-cacao rounded-full px-8 py-4 text-[13px] font-medium tracking-[0.08em] uppercase hover:bg-cacao hover:text-cream transition cursor-pointer min-h-[48px]">Reservar <span class="w-7 h-[1px] bg-current block" aria-hidden="true"></span></a>
+      <span class="hidden sm:inline editorial-num text-stone text-[11px]">Mar–Dom · 12—22H</span>
+    </div>
+    <div class="hidden lg:block absolute -bottom-12 -right-12 w-48 h-48 rounded-full bg-sand/60 blur-[1px] pointer-events-none" aria-hidden="true"></div>
+  </div>
+</section>
+
+<div class="hairline" aria-hidden="true"></div>
+
+<section class="max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-14 py-16 sm:py-24 lg:py-32">
+  <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="lg:col-span-5">
+      <p class="editorial-num text-terracotta text-[12px]">02 — MANIFIESTO</p>
+      <h2 class="font-serif text-[32px] sm:text-[38px] lg:text-[48px] leading-[0.95] tracking-[-0.03em] mt-6">Volvimos al puesto del mercado<br><span class="italic font-light">para entender el territorio.</span></h2>
+    </div>
+    <div class="lg:col-span-5 lg:col-start-8">
+      <p class="text-[16px] leading-7 sm:leading-8 text-cacao/80">No hay atajos. El maíz se desgrana a mano, el cerdo se confita doce horas y el ají se fermenta en barro. Sabor Quiteño no es una hacienda: es un taller contemporáneo donde la arquitectura de adobe, la luz cenital y el oficio manual conviven con una cocina precisa.</p>
+      <div class="mt-10 grid grid-cols-3 gap-6 border-t border-line pt-8">
+        <div><p class="font-serif text-[24px]">12</p><p class="editorial-num text-stone mt-1">años</p></div>
+        <div><p class="font-serif text-[24px]">2.4k</p><p class="editorial-num text-stone mt-1">platos / mes</p></div>
+        <div><p class="font-serif text-[24px]">42</p><p class="editorial-num text-stone mt-1">puestos</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid lg:grid-cols-12 gap-4 sm:gap-6 mt-16 sm:mt-20">
+    <div class="lg:col-span-7 img-reveal overflow-hidden h-[380px] sm:h-[520px]"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80" alt="Interior de adobe con luz natural" class="w-full h-full object-cover" loading="lazy"></div>
+    <div class="lg:col-span-5 flex flex-col gap-4 sm:gap-6">
+      <div class="img-reveal overflow-hidden h-[260px] sm:h-[300px]" style="transition-delay:.12s"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Mesa servida con vajilla artesanal" class="w-full h-full object-cover" loading="lazy"></div>
+      <div class="bg-cacao text-cream p-8 sm:p-10 flex-1 flex flex-col justify-center"><p class="font-serif text-[22px] leading-6">“Que te sientas en casa,<br><span class="italic font-light text-clay">pero sin lavar platos.”</span></p><p class="editorial-num text-cream/60 mt-4">Rosa &amp; Camilo — fundadores</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="territorio" class="bg-olive text-cream overflow-hidden">
+  <div class="max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-14 py-14 sm:py-16 flex flex-wrap items-end justify-between gap-6">
+    <div><p class="editorial-num text-clay text-[12px]">03 — TERRITORIO</p><h2 class="font-serif text-[34px] sm:text-[42px] lg:text-[52px] leading-[0.95] tracking-[-0.03em] mt-3">De la sierra a la costa<br><span class="italic font-light text-clay">en tres ingredientes.</span></h2></div>
+    <p class="max-w-[380px] text-[15px] leading-7 text-cream/75">Caminamos el país antes de escribir la carta. Cada producto llega con nombre, altura y manos.</p>
+  </div>
+  <div id="horizontal" class="flex gap-4 sm:gap-6 px-6 sm:px-10 lg:px-14 pb-14 sm:pb-16 overflow-x-auto no-scrollbar snap-x snap-mandatory" role="region" aria-label="Ingredientes de territorio" tabindex="0">
+    <article class="min-w-[82vw] sm:min-w-[420px] lg:min-w-[520px] snap-start">
+      <div class="overflow-hidden h-[420px] sm:h-[520px]"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" alt="Maíz andino secado al sol" class="w-full h-full object-cover" loading="lazy"></div>
+      <p class="editorial-num text-clay mt-4">CHIMBORAZO · 3.200M</p><p class="font-serif text-[20px] mt-1">Maíz chulpi &amp; morocho</p><p class="text-sm text-cream/60 mt-1">Secado al sol, tostado en comal de barro.</p>
+    </article>
+    <article class="min-w-[82vw] sm:min-w-[420px] lg:min-w-[520px] snap-start">
+      <div class="overflow-hidden h-[420px] sm:h-[520px]"><img src="https://images.unsplash.com/photo-1574653361786-0a52f6eff2f1?auto=format&fit=crop&w=900&q=80" alt="Cacao nacional fino de Manabí" class="w-full h-full object-cover" loading="lazy"></div>
+      <p class="editorial-num text-clay mt-4">MANABÍ · 80M</p><p class="font-serif text-[20px] mt-1">Cacao nacional fino</p><p class="text-sm text-cream/60 mt-1">Fermentado 6 días, usado en moles y postres.</p>
+    </article>
+    <article class="min-w-[82vw] sm:min-w-[420px] lg:min-w-[520px] snap-start">
+      <div class="overflow-hidden h-[420px] sm:h-[520px]"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80" alt="Cerdo de páramo en horno de leña" class="w-full h-full object-cover" loading="lazy"></div>
+      <p class="editorial-num text-clay mt-4">COTOPAXI · 3.400M</p><p class="font-serif text-[20px] mt-1">Cerdo de páramo</p><p class="text-sm text-cream/60 mt-1">Doce horas de horno de leña, piel crocante.</p>
+    </article>
+    <article class="min-w-[82vw] sm:min-w-[420px] lg:min-w-[520px] snap-start">
+      <div class="overflow-hidden h-[420px] sm:h-[520px]"><img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=900&q=80" alt="Ají fermentado y hierbas" class="w-full h-full object-cover" loading="lazy"></div>
+      <p class="editorial-num text-clay mt-4">IMBABURA · VALLE</p><p class="font-serif text-[20px] mt-1">Ají y hierbas</p><p class="text-sm text-cream/60 mt-1">Fermentos, encurtidos y salsas vivas.</p>
+    </article>
+  </div>
+  <p class="px-6 sm:px-10 lg:px-14 pb-8 editorial-num text-cream/60">Desliza horizontal — territorio en movimiento</p>
+</section>
+
+<section id="menu" class="max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-14 py-16 sm:py-24 lg:py-32">
+  <div class="flex flex-wrap items-baseline justify-between gap-6 border-b border-line pb-8">
+    <div><p class="editorial-num text-terracotta text-[12px]">04 — CARTA</p><h2 class="font-serif text-[36px] sm:text-[48px] lg:text-[60px] leading-none tracking-[-0.04em] mt-3">Lo del día</h2></div>
+    <p class="editorial-num text-stone max-w-[320px] text-left sm:text-right text-[12px]">Porciones precisas · La carta cambia según mercado · IVA incluido</p>
+  </div>
+  <div class="mt-2 divide-y divide-line" role="list">
+    <a href="https://wa.me/593999123456?text=Quiero%20reservar%20para%20probar%20Encebollado" target="_blank" rel="noopener" role="listitem" class="group flex items-baseline gap-4 sm:gap-6 py-7 sm:py-8 hover:pl-2 transition-all cursor-pointer focus-visible:outline-offset-2">
+      <span class="editorial-num text-stone hidden sm:block" aria-hidden="true">01</span>
+      <h3 class="font-serif text-[24px] sm:text-[30px] lg:text-[38px] leading-none tracking-[-0.03em] flex-1">Encebollado de albacora <span class="hidden sm:inline font-light italic text-terracotta text-[22px] lg:text-[28px]">— yuca, encurtido, chifle</span></h3>
+      <span class="font-serif text-[16px] sm:text-[18px] font-medium">$6,50</span>
+      <span class="hidden lg:grid w-24 h-16 overflow-hidden rounded-full opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition" aria-hidden="true"><img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=300&q=80" alt="" class="w-full h-full object-cover" loading="lazy"></span>
+    </a>
+    <a href="https://wa.me/593999123456?text=Quiero%20reservar%20para%20probar%20Hornado" target="_blank" rel="noopener" role="listitem" class="group flex items-baseline gap-4 sm:gap-6 py-7 sm:py-8 hover:pl-2 transition-all cursor-pointer focus-visible:outline-offset-2">
+      <span class="editorial-num text-stone hidden sm:block">02</span>
+      <h3 class="font-serif text-[24px] sm:text-[30px] lg:text-[38px] leading-none tracking-[-0.03em] flex-1">Hornado 12h <span class="hidden sm:inline font-light italic text-terracotta text-[22px] lg:text-[28px]">— mote sucio, agrio, llapingacho</span></h3>
+      <span class="font-serif text-[16px] sm:text-[18px] font-medium">$14,50</span>
+      <span class="hidden lg:grid w-24 h-16 overflow-hidden rounded-full opacity-0 group-hover:opacity-100 transition" aria-hidden="true"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80" alt="" class="w-full h-full object-cover" loading="lazy"></span>
+    </a>
+    <a href="https://wa.me/593999123456?text=Quiero%20reservar%20Llapingachos" target="_blank" rel="noopener" role="listitem" class="group flex items-baseline gap-4 sm:gap-6 py-7 sm:py-8 hover:pl-2 transition-all cursor-pointer focus-visible:outline-offset-2">
+      <span class="editorial-num text-stone hidden sm:block">03</span>
+      <h3 class="font-serif text-[24px] sm:text-[30px] lg:text-[38px] tracking-[-0.03em] leading-none flex-1">Llapingachos <span class="hidden sm:inline font-light italic text-terracotta">— papa andina, chorizo, maní</span></h3>
+      <span class="font-serif text-[16px] sm:text-[18px] font-medium">$8,90</span>
+      <span class="hidden lg:grid w-24 h-16 overflow-hidden rounded-full opacity-0 group-hover:opacity-100 transition" aria-hidden="true"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=300&q=80" alt="" class="w-full h-full object-cover" loading="lazy"></span>
+    </a>
+    <a href="https://wa.me/593999123456?text=Quiero%20reservar%20Ceviche" target="_blank" rel="noopener" role="listitem" class="group flex items-baseline gap-4 sm:gap-6 py-7 sm:py-8 hover:pl-2 transition-all cursor-pointer focus-visible:outline-offset-2">
+      <span class="editorial-num text-stone hidden sm:block">04</span>
+      <h3 class="font-serif text-[24px] sm:text-[30px] lg:text-[38px] tracking-[-0.03em] leading-none flex-1">Ceviche de camarón <span class="hidden sm:inline font-light italic text-terracotta">— manabita, chifle</span></h3>
+      <span class="font-serif text-[16px] sm:text-[18px] font-medium">$12,00</span>
+      <span class="hidden lg:grid w-24 h-16 overflow-hidden rounded-full opacity-0 group-hover:opacity-100 transition" aria-hidden="true"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=300&q=80" alt="" class="w-full h-full object-cover" loading="lazy"></span>
+    </a>
+    <a href="https://wa.me/593999123456?text=Quiero%20reservar%20Seco%20de%20chivo" target="_blank" rel="noopener" role="listitem" class="group flex items-baseline gap-4 sm:gap-6 py-7 sm:py-8 hover:pl-2 transition-all cursor-pointer focus-visible:outline-offset-2">
+      <span class="editorial-num text-stone hidden sm:block">05</span>
+      <h3 class="font-serif text-[24px] sm:text-[30px] lg:text-[38px] tracking-[-0.03em] leading-none flex-1">Seco de chivo <span class="hidden sm:inline font-light italic text-terracotta">— chicha, maduro, aguacate</span></h3>
+      <span class="font-serif text-[16px] sm:text-[18px] font-medium">$11,50</span>
+      <span class="hidden lg:grid w-24 h-16 overflow-hidden rounded-full opacity-0 group-hover:opacity-100 transition" aria-hidden="true"><img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=300&q=80" alt="" class="w-full h-full object-cover" loading="lazy"></span>
+    </a>
+    <a href="https://wa.me/593999123456?text=Quiero%20reservar%20Fanesca" target="_blank" rel="noopener" role="listitem" class="group flex items-baseline gap-4 sm:gap-6 py-7 sm:py-8 hover:pl-2 transition-all cursor-pointer focus-visible:outline-offset-2">
+      <span class="editorial-num text-stone hidden sm:block">06</span>
+      <h3 class="font-serif text-[24px] sm:text-[30px] lg:text-[38px] tracking-[-0.03em] leading-none flex-1">Fanesca <span class="hidden sm:inline font-light italic text-terracotta">— 12 granos, bacalao</span> <span class="ml-2 text-[10px] tracking-[0.14em] border border-clay px-2 py-1 rounded-full align-middle">TEMPORADA</span></h3>
+      <span class="font-serif text-[16px] sm:text-[18px] font-medium">$7,50</span>
+      <span class="hidden lg:grid w-24 h-16 overflow-hidden rounded-full opacity-0 group-hover:opacity-100 transition" aria-hidden="true"><img src="https://images.unsplash.com/photo-1574653361786-0a52f6eff2f1?auto=format&fit=crop&w=300&q=80" alt="" class="w-full h-full object-cover" loading="lazy"></span>
+    </a>
+  </div>
+  <div class="mt-10 flex flex-wrap gap-3">
+    <a href="https://wa.me/593999123456?text=Quiero%20ver%20la%20carta%20completa" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-line hover:border-cacao px-6 py-3 rounded-full text-sm cursor-pointer transition min-h-[44px]">Carta completa por WhatsApp</a>
+    <span class="inline-flex items-center editorial-num text-stone px-4 py-2">Sin atajos · Fuego lento</span>
+  </div>
+</section>
+
+<section id="espacio" class="relative bg-cacao text-cream overflow-hidden">
+  <div class="grid lg:grid-cols-2 min-h-[70vh]">
+    <div class="relative h-[48vh] lg:h-auto overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Sala con muros de adobe y luz cenital" class="w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-cacao/10" aria-hidden="true"></div>
+    </div>
+    <div class="flex flex-col justify-center px-6 sm:px-10 lg:px-16 py-12 sm:py-16">
+      <p class="editorial-num text-clay">05 — ESPACIO</p>
+      <h2 class="font-serif text-[28px] sm:text-[36px] lg:text-[44px] leading-[1.05] tracking-[-0.02em] mt-4">Adobe, madera y luz cenital.<br><span class="italic font-light text-clay">Una casa quiteña contemporánea.</span></h2>
+      <p class="mt-6 text-sm leading-6 text-cream/70 max-w-[420px]">Paredes de barro pulido, mesas de roble reciclado y textiles tejidos a mano. Nada folclórico: material honesto, sombra dramática y silencio.</p>
+      <div class="mt-10 grid grid-cols-2 gap-6 border-t border-white/10 pt-8">
+        <div><p class="editorial-num text-clay">Capacidad</p><p class="font-serif text-[20px] mt-1">42 puestos</p></div>
+        <div><p class="editorial-num text-clay">Horario</p><p class="text-sm mt-1 leading-5">Mar–Dom 12–22H<br>Lun cerrado</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-2 lg:grid-cols-12 gap-0 border-t border-white/10">
+    <div class="col-span-1 lg:col-span-5 h-[220px] sm:h-[320px] overflow-hidden"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80" alt="Detalle de barra de madera" class="w-full h-full object-cover" loading="lazy"></div>
+    <div class="col-span-1 lg:col-span-7 h-[220px] sm:h-[320px] overflow-hidden"><img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=1200&q=80" alt="Terraza con vegetación" class="w-full h-full object-cover" loading="lazy"></div>
+  </div>
+</section>
+
+<section id="visitanos" class="max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-14 py-16 sm:py-24 lg:py-28">
+  <div class="grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-5">
+      <p class="editorial-num text-terracotta">06 — VISÍTANOS</p>
+      <h2 class="font-serif text-[34px] sm:text-[44px] leading-none tracking-[-0.03em] mt-4">Te esperamos<br><span class="italic font-light">con la mesa puesta.</span></h2>
+      <div class="mt-8 space-y-4 text-sm leading-6">
+        <p><span class="font-medium">Av. Amazonas N23-45 y Colón, Quito</span><br><span class="text-cacao/70">Puerta de madera, buganvilla. Parqueadero a 50m.</span></p>
+        <p class="text-cacao/70">099 912 3456 · hola@saborquiteno.ec</p>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="https://wa.me/593999123456?text=Hola%20quiero%20reservar" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-cacao text-cream px-6 py-3.5 rounded-full text-sm cursor-pointer hover:bg-olive transition min-h-[44px]">Reservar por WhatsApp</a>
+        <a href="https://maps.google.com/?q=Av+Amazonas+Quito" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-line px-6 py-3.5 rounded-full text-sm cursor-pointer hover:border-cacao transition min-h-[44px]">Cómo llegar</a>
+      </div>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="bg-sand p-2 rounded-[20px]">
+        <div class="rounded-[14px] overflow-hidden h-[360px] sm:h-[420px]"><iframe title="Mapa Sabor Quiteño" src="https://www.openstreetmap.org/export/embed.html?bbox=-78.52%2C-0.21%2C-78.48%2C-0.18&layer=mapnik&marker=-0.195%2C-78.50" class="w-full h-full border-0 grayscale contrast-[1.02]" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      </div>
+      <form id="reservaForm" class="mt-4 flex flex-col sm:flex-row gap-3" aria-label="Reservar mesa">
+        <input type="text" name="name" placeholder="Nombre" aria-label="Nombre" required class="form-field">
+        <input type="tel" name="whatsapp" placeholder="WhatsApp" aria-label="WhatsApp" required pattern="^[0-9+\s-]{8,}$" class="form-field">
+        <button type="submit" class="bg-cacao text-cream px-7 py-3 rounded-full text-sm cursor-pointer hover:bg-olive transition min-h-[44px]">Solicitar</button>
+      </form>
+      <p class="text-xs text-stone mt-2">Al enviar abres WhatsApp con tus datos.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="border-t border-line">
+  <div class="max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-14 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+    <div>
+      <p class="font-serif text-[18px]">Sabor Quiteño<span class="font-light"> —</span></p>
+      <p class="editorial-num text-stone mt-2">© 2026 · Quito, Ecuador · Hecho con leña y oficio</p>
+    </div>
+    <div class="flex items-center gap-6 editorial-num text-[11px]">
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-terracotta cursor-pointer">Instagram</a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener" class="hover:text-terracotta cursor-pointer">Tiktok</a>
+      <span class="hidden sm:inline text-stone">Landing demo · $80 USD · Entrega 2 semanas</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-cream/95 backdrop-blur border-t border-line p-3 flex items-center gap-3" style="padding-bottom: calc(0.75rem + env(safe-area-inset-bottom))">
+  <div class="flex-1"><p class="text-xs font-medium leading-none">¿Reservamos?</p><p class="text-[11px] text-stone">Respuesta en &lt;5 min</p></div>
+  <a href="https://wa.me/593999123456?text=Hola%20Sabor%20Quite%C3%B1o%2C%20quiero%20reservar" target="_blank" rel="noopener" class="bg-cacao text-cream px-5 py-3 rounded-full text-sm font-medium cursor-pointer min-h-[44px] flex items-center">WhatsApp</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.18/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
